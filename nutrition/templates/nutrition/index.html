@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Smart CalorieMax: Подбор продуктов</title>
+
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+
+    <!-- Основной CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <style>
+        .page-wrapper {
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Healthy Hub</h2>
+                    <h4>Подбор продуктов с учетом ваших ограничений</h4>
+                    <br /><br /><br />
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group" style="display: flex; align-items: center; gap: 10px;">
+                            {{ form.health_profile.label_tag }}
+                            {{ form.health_profile }}
+                        </div>
+                        <div class="input-group inline-field">
+                            {{ form.calorie_goal.label_tag }}
+                            {{ form.calorie_goal }}
+                        </div>                        
+                        <div class="input-group" style="display: flex; align-items: center; gap: 10px; margin-top: 50px;">
+                            {{ form.exclude_ingredients.label_tag }}
+                            {{ form.exclude_ingredients }}
+                        </div>
+                        <br><br>
+                        <button type="submit" class="btn btn--radius btn--green">Рассчитать</button>
+                    </form>
+
+                    {% if result %}
+                        <div class="result">
+                            Результат: {{ result }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
