@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .page-wrapper {
+            padding: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-wrapper p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Мой профиль</h2>
+                    <h4>Подбор продуктов с учетом ваших ограничений</h4>
+                    <br />
+                    <div class="tabs">
+                        <ul class="tab-nav">
+                            <li class="active" data-tab="tab-profile">Данные</li>
+                            <li data-tab="tab-prefs">Предпочтения</li>
+                            <li data-tab="tab-results">Результаты</li>
+                            <li data-tab="tab-settings">Настройки</li>
+                        </ul>
+
+                        <div class="tab-content active" id="tab-profile">
+                            
+                            <h2>Привет, {{ user.username }}</h2>
+                            <p>Email: {{ user.email }}</p>
+                            <p>Возраст: {{ user.age }}</p>
+                            <p>Рост: {{ user.height_cm }} см</p>
+                        </div>
+
+
+                        <div class="tab-content" id="tab-results">
+                            <p>Здесь можно отобразить историю подборов.</p>
+                        </div>
+
+                        <div class="tab-content" id="tab-settings">
+                            <a href="#">Редактировать профиль</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
