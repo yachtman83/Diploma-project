@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import random
 import copy
-
+import matplotlib.pyplot as plt
 # константы генетического алгоритма
 
 POPULATION_SIZE = 200   # количество индивидуумов в популяции
@@ -152,11 +152,11 @@ def increase_decrease_mutation(chromosome):
 
 def generate_meal_plan(health_profile, calorie_goal):
 
+    result_items = []
+    total_price = 0
+
     population = generate_initial_population(POPULATION_SIZE)
     p1 = copy.deepcopy(population)
-
-
-    import matplotlib.pyplot as plt
 
     # Переменные для хранения значений приспособленности
     maxFitnessValues = []
@@ -206,18 +206,25 @@ def generate_meal_plan(health_profile, calorie_goal):
         sm += float(f"{item['price']:.4f}")
         print(formatted_item)
     print(sm)
-    
+    #return f"Вы выбрали '{health_profile}', цель: {calorie_goal} калорий."
 
-    #plt.plot(maxFitnessValues, color='red', label='Минимальная приспособленность')
-    #plt.plot(meanFitnessValues, color='green', label='Средняя приспособленность')
-    #plt.xlabel('Поколение')
-    #plt.ylabel('Приспособленность')
-    #plt.title('Зависимость максимальной и средней приспособленности от поколения')
-    #plt.legend()
-    #plt.show()
-    return f"Вы выбрали '{health_profile}', цель: {calorie_goal} калорий."
+    for item in best_solution[:5]:
+        formatted_item = {
+            'name': item['name'],
+            'price': f"{item['price']:.2f}",
+            'proteins': f"{item['proteins']:.2f}",
+            'fats': f"{item['fats']:.2f}",
+            'carbs': f"{item['carbs']:.2f}",
+            'portion': f"{item['portion']:.2f}"
+        }
+        result_items.append(formatted_item)
+        total_price += item['price']
 
-    
+    summary = {
+        'health_profile': health_profile,
+        'calorie_goal': calorie_goal,
+        'items': result_items,
+        'total_price': f"{total_price:.2f}"
+    }
 
-generate_meal_plan("нет", 800)
-
+    return summary

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .page-wrapper {
+            padding: 20px;
+        }
+        
+
+                /* Общий стиль для input-полей */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 15px;
+            margin: 10px 0 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* При фокусе на input — подсветка */
+        input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+        /* Стили для label */
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Чтобы инпуты не слипались */
+        form div {
+            margin-bottom: 20px;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="page-wrapper p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Healthy Hub</h2>
+                    <h4>Подбор продуктов с учетом ваших ограничений</h4>
+                    <br />
+
+                    {% if form.errors %}
+                    <div class="form-errors" style="color: red; margin-bottom: 20px;">
+                      <ul>
+                        {% for field in form %}
+                          {% for error in field.errors %}
+                            <li>{{ field.label }}: {{ error }}</li>
+                          {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                          <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+
+                    <form method="post">
+                    {% csrf_token %}
+                      <div>
+                        <label for="id_username">Имя пользователя:</label>
+                        {{ form.username }}
+                      </div>
+
+                      <div>
+                        <label for="id_email">Email:</label>
+                        {{ form.email }}
+                      </div>
+
+                      <div>
+                        <label for="id_password1">Пароль:</label>
+                        {{ form.password1 }}
+                      </div>
+
+                      <div>
+                        <label for="id_password2">Повторите пароль:</label>
+                        {{ form.password2 }}
+                      </div>
+                      <br><br>
+                      <a href="{% url 'login' %}">Уже зарегистрированы</a>
+                      <button type="submit" class="btn btn--radius btn--green">Зарегистрироваться</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

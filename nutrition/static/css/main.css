@@ -523,3 +523,37 @@ input[type="number"].no-spinner::-webkit-inner-spin-button {
   max-width: 200px;
 }
 
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.nutrition-th,
+.nutrition-td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.nutrition-th {
+  background-color: #d4edda;
+  color: #333;
+}
+
+.nutrition-td.name {
+  text-align: left;
+  word-break: break-word;
+  max-width: 200px;
+}
+
+.nutrition-footer .total-label {
+  text-align: right;
+  font-weight: bold;
+}
+
+.nutrition-footer .total-price {
+  font-weight: bold;
+  background-color: #eaf5ea;
+}

@@ -21,4 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("diploma.urls")),
     path('nutrition/', include('nutrition.urls')),
+
+    #users 
+    path('users/', include('users.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),  # login/logout/password
 ]

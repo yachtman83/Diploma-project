@@ -21,8 +21,8 @@ def input_view(request):
                     user=request.user,
                     result_text=str(result)
                 )
-
-            return render(request, "nutrition/results.html", {"result": result})
+                
+                return render(request, "nutrition/index.html", {"form": form, "result": result})
     else:
         form = PreferenceForm()
     return render(request, "nutrition/index.html", {"form": form})

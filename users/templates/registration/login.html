@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Логин{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        .page-wrapper {
+            padding: 20px;
+        }
+        
+
+                /* Общий стиль для input-полей */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 15px;
+            margin: 10px 0 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* При фокусе на input — подсветка */
+        input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+        /* Стили для label */
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Чтобы инпуты не слипались */
+        form div {
+            margin-bottom: 20px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-wrapper p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Healthy Hub</h2>
+                    <h4>Подбор продуктов с учетом ваших ограничений</h4>
+                    <br /><br /><br />
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <br><br>
+                        <a href="{% url 'register' %}">Нет аккаунта?</a>
+                        <button type="submit" class="btn btn--radius btn--green">Войти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
